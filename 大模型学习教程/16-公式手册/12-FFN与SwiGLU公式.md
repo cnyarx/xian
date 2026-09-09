@@ -36,11 +36,12 @@ $$
 GLU（Gated Linear Unit）用一个分支生成内容，另一个分支充当门：
 
 $$
-\operatorname{GLU}(x)=(xW_a)\odot\sigma(xW_b)
+\operatorname{GLU}(x)=(W_ax)\odot\sigma(W_bx)
 $$
 
+- $x\in\mathbb R^{d_{model}}$ 按列向量处理；
 - $\odot$：逐元素乘法；
-- $W_a,W_b$：两个线性投影；
+- $W_a,W_b\in\mathbb R^{d_{ff}\times d_{model}}$：两个线性投影；
 - $\sigma$：sigmoid，门值在 $(0,1)$。
 
 ## 3. SwiGLU
@@ -49,7 +50,7 @@ SwiGLU 用 SiLU 作为门控激活：
 
 $$
 \operatorname{SwiGLU}(x)=
-\operatorname{SiLU}(xW_g)\odot(xW_u)
+\operatorname{SiLU}(W_gx)\odot(W_ux)
 $$
 
 完整输出经过下降投影：
